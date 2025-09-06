@@ -26,6 +26,7 @@ def ball_movement():
             ball_speed_y *= -1  # Reverse ball's vertical direction
             # TODO Task 6: Add sound effects HERE
 
+
     # Ball collision with top boundary
     if ball.top <= 0:
         ball_speed_y *= -1  # Reverse ball's vertical direction
@@ -69,6 +70,10 @@ screen_width = 500  # Screen width (can be adjusted)
 screen_height = 500  # Screen height (can be adjusted)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Pong')  # Set window title
+pygame.mixer.music.load("pa0-pa0/assets/Smash Mouth - I'm A Believer 22.50.31.mp3")
+# Se añadió la música en bucle, all final sale el cantante de smash mouth diciendo algo. Pensé en quitarlo pero env como homenaje lo voy a dejar.
+pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(0.2)
 
 # Colors
 background = pygame.image.load("pa0-pa0/assets/bg.png") #Imagen de Shrek
@@ -125,7 +130,7 @@ while True:
     screen.fill(bg_color)  # Clear screen with background color
     screen.blit(background, (0,0))
     pygame.draw.rect(screen, light_grey, player)  # Draw player paddle
-    green = pygame.Color("green") # TODO Task 3: Change the Ball Color
+    green = pygame.Color("green") # TODO Task 3: La bola es de color verde ahora
     pygame.draw.ellipse(screen, green, ball)  # Draw ball
     player_text = basic_font.render(f'{score}', False, light_grey)  # Render player score
     screen.blit(player_text, (screen_width/2 - 15, 10))  # Display score on screen
