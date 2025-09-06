@@ -56,7 +56,7 @@ def restart():
     """
     global ball_speed_x, ball_speed_y, score
     ball.center = (screen_width / 2, screen_height / 2)  # Reset ball position to center
-    ball_speed_y, ball_speed_x = random.randint(1,15),random.randint(1,15)  # Stop ball movement
+    ball_speed_y, ball_speed_x = random.randint(1,15),random.randint(1,15) # Hay que mejorar esto, esta para que el juego vuelva a empezar pero se necesita pulir.
     score = 0  # Reset player score
 
 # General setup
@@ -71,6 +71,8 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Pong')  # Set window title
 
 # Colors
+background = pygame.image.load("pa0-pa0/assets/bg.png") #Imagen de Shrek
+pygame.transform.scale(background, (screen_height, screen_width))
 bg_color = pygame.Color('grey12')
 
 # Game Rectangles (ball and player paddle)
@@ -121,6 +123,7 @@ while True:
     light_grey = pygame.Color('grey83')
     red = pygame.Color('red')
     screen.fill(bg_color)  # Clear screen with background color
+    screen.blit(background, (0,0))
     pygame.draw.rect(screen, light_grey, player)  # Draw player paddle
     green = pygame.Color("green") # TODO Task 3: Change the Ball Color
     pygame.draw.ellipse(screen, green, ball)  # Draw ball
