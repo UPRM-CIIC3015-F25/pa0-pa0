@@ -86,7 +86,11 @@ pygame.transform.scale(background, (screen_height, screen_width))
 bg_color = pygame.Color('grey12')
 
 # Game Rectangles (ball and player paddle)
-ball = pygame.Rect(screen_width / 2 - 15, screen_height / 2 - 15, 30, 30)  # Ball (centered)
+ball = pygame.Rect(screen_width / 2 - 15, screen_height / 2 - 15, 75, 75)  # Tamaño de la bola
+shrek_img = pygame.image.load("pa0-pa0/assets/shrek_face.png").convert_alpha()
+shrek_img = pygame.transform.smoothscale(shrek_img, (ball.width, ball.height))
+
+
 # TODO Task 1 Make the paddle bigger
 player_height = 15
 player_width = 200
@@ -136,7 +140,7 @@ while True:
     screen.blit(background, (0,0))
     pygame.draw.rect(screen, red, player)  # Draw player paddle
     green = pygame.Color("green") # TODO Task 3: La bola es de color verde ahora
-    pygame.draw.ellipse(screen, green, ball)  # Draw ball
+    screen.blit(shrek_img, ball) # Draw ball
     player_text = basic_font.render(f'{score}', False, red)  # Render player score
     screen.blit(player_text, (screen_width/2 - 15, 10))  # Display score on screen
 
