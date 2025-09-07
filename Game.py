@@ -1,5 +1,11 @@
 import pygame, sys, random
 
+pygame.mixer.pre_init(44100, -16, 2, 512)
+pygame.init()
+
+lose_sound = pygame.mixer.Sound("pa0-pa0/assets/Nooo.mp3")
+lose_sound.set_volume(0.5)
+
 def ball_movement():
     """
     Handles the movement of the ball and collision detection with the player and screen boundaries.
@@ -37,8 +43,9 @@ def ball_movement():
 
     # Ball goes below the bottom boundary (missed by player)
     if ball.bottom > screen_height:
+        pygame.mixer.music.stop()
+        lose_sound.play()
         restart()  # Reset the game
-
 
 def player_movement():
     """
@@ -63,6 +70,10 @@ def restart():
     score = 0  # Reset player score
     ball_speed_x = speed * random.choice((-1, 1))  # Randomize initial horizontal direction
     ball_speed_y = speed * random.choice((-1, 1))
+
+    # Reiniciar música
+    pygame.mixer.music.stop()
+    pygame.mixer.music.play(-1)
 
 # General setup
 pygame.mixer.pre_init(44100, -16, 1, 1024)
