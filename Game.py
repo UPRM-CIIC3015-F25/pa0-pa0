@@ -56,10 +56,13 @@ def restart():
     """
     Resets the ball and player scores to the initial state.
     """
+    speed = 9
     global ball_speed_x, ball_speed_y, score
+
     ball.center = (screen_width / 2, screen_height / 2)  # Reset ball position to center
-    ball_speed_y, ball_speed_x = random.randint(1,15),random.randint(1,15) # Hay que mejorar esto, esta para que el juego vuelva a empezar pero se necesita pulir.
     score = 0  # Reset player score
+    ball_speed_x = speed * random.choice((-1, 1))  # Randomize initial horizontal direction
+    ball_speed_y = speed * random.choice((-1, 1))
 
 # General setup
 pygame.mixer.pre_init(44100, -16, 1, 1024)
