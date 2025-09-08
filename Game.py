@@ -3,6 +3,8 @@ import pygame, sys, random
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 
+high_score = 0
+
 lose_sound = pygame.mixer.Sound("pa0-pa0/assets/Nooo.mp3")
 lose_sound.set_volume(0.8)
 hit_sound = [  
@@ -28,7 +30,7 @@ def ball_movement():
     """
     Handles the movement of the ball and collision detection with the player and screen boundaries.
     """
-    global ball_speed_x, ball_speed_y, score, start
+    global ball_speed_x, ball_speed_y, score, start, high_score
 
     # Move the ball
     ball.x += ball_speed_x
@@ -83,7 +85,11 @@ def restart():
     Resets the ball and player scores to the initial state.
     """
     speed = 9
-    global ball_speed_x, ball_speed_y, score
+    global ball_speed_x, ball_speed_y, score, high_score
+
+
+    if score > high_score:
+        high_score = score
 
     ball.center = (screen_width / 2, screen_height / 2)  # Reset ball position to center
     score = 0  # Reset player score
@@ -173,6 +179,8 @@ while True:
     screen.blit(shrek_img, ball) # Draw ball
     player_text = basic_font.render(f'{score}', False, red)  # Render player score
     screen.blit(player_text, (screen_width/2 - 15, 10))  # Display score on screen
+    high_score_text = basic_font.render(f"HS: {high_score}", True, red)
+    screen.blit(high_score_text, (10,10))
 
     # Update display
     pygame.display.flip()
