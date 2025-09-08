@@ -121,7 +121,6 @@ screen_height = 500  # Screen height (can be adjusted)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Shrek The Game')  # Set window title
 pygame.mixer.music.load("assets/Believer_arreglada.mp3")
-# Se añadió la música en bucle, all final sale el cantante de smash mouth diciendo algo. Pensé en quitarlo pero env como homenaje lo voy a dejar.
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.1)
 
