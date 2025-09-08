@@ -3,13 +3,15 @@ import pygame, sys, random
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 
-lose_sound = pygame.mixer.Sound("assets/Nooo.mp3")
+high_score = 0
+
+lose_sound = pygame.mixer.Sound("pa0-pa0/assets/Nooo.mp3")
 lose_sound.set_volume(0.8)
 hit_sound = [  
-    pygame.mixer.Sound("assets/pinpon.mp3"),
-    pygame.mixer.Sound("assets/a_pinpon.mp3"),
-    pygame.mixer.Sound("assets/Cerdo.mp3"),
-    pygame.mixer.Sound("assets/Pinoccio.mp3")]
+    pygame.mixer.Sound("pa0-pa0/assets/pinpon.mp3"),
+    pygame.mixer.Sound("pa0-pa0/assets/a_pinpon.mp3"),
+    pygame.mixer.Sound("pa0-pa0/assets/Cerdo.mp3"),
+    pygame.mixer.Sound("pa0-pa0/assets/Pinoccio.mp3")]
 
 for audio in hit_sound:
     audio.set_volume(0.9)
@@ -28,7 +30,7 @@ def ball_movement():
     """
     Handles the movement of the ball and collision detection with the player and screen boundaries.
     """
-    global ball_speed_x, ball_speed_y, score, start
+    global ball_speed_x, ball_speed_y, score, start, high_score
 
     # Move the ball
     ball.x += ball_speed_x
@@ -48,18 +50,6 @@ def ball_movement():
             # TODO Task 2: Fix score to increase by 1
             score += 1  # Increase player score
             ball_speed_y *= -1  # Reverse ball's vertical direction
-
-            #La bola aumenta la velocidad cada vez que toca al jugador
-            if ball_speed_x > 0:
-                ball_speed_x += 0.2
-            else:
-                ball_speed_x -= 0.2
-
-            if ball_speed_y > 0:
-                ball_speed_y += 0.2
-            else:
-                ball_speed_y -= 0.2
-
             # TODO Task 6: Add sound effects HERE
             play_random_hit()
 
@@ -95,7 +85,11 @@ def restart():
     Resets the ball and player scores to the initial state.
     """
     speed = 9
-    global ball_speed_x, ball_speed_y, score
+    global ball_speed_x, ball_speed_y, score, high_score
+
+
+    if score > high_score:
+        high_score = score
 
     ball.center = (screen_width / 2, screen_height / 2)  # Reset ball position to center
     score = 0  # Reset player score
@@ -116,20 +110,20 @@ screen_width = 500  # Screen width (can be adjusted)
 screen_height = 500  # Screen height (can be adjusted)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Shrek The Game')  # Set window title
-pygame.mixer.music.load("assets/Believer_arreglada.mp3")
+pygame.mixer.music.load("pa0-pa0/assets/Believer_arreglada.mp3")
 # Se añadió la música en bucle, all final sale el cantante de smash mouth diciendo algo. Pensé en quitarlo pero env como homenaje lo voy a dejar.
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.1)
 
 
 # Background
-background = pygame.image.load("assets/Shrek bg.png")#Imagen de Shrek
+background = pygame.image.load("pa0-pa0/assets/Shrek bg.png")#Imagen de Shrek
 pygame.transform.scale(background, (screen_height, screen_width))
 bg_color = pygame.Color('grey12')
 
 # Game Rectangles (ball and player paddle)
 ball = pygame.Rect(screen_width / 2 - 15, screen_height / 2 - 15, 75, 75)  # Tamaño de la bola
-shrek_img = pygame.image.load("assets/shrek_face.png").convert_alpha()
+shrek_img = pygame.image.load("pa0-pa0/assets/shrek_face.png").convert_alpha()
 shrek_img = pygame.transform.smoothscale(shrek_img, (ball.width, ball.height))
 
 
@@ -145,7 +139,7 @@ player_speed = 0
 
 # Score Text setup
 score = 0
-basic_font = pygame.font.Font('assets/Prince Valiant.ttf', 50)  # Font for displaying score
+basic_font = pygame.font.Font('pa0-pa0/assets/Prince Valiant.ttf', 50)  # Font for displaying score
 
 start = True  # Indicates if the game has started
 
@@ -185,6 +179,8 @@ while True:
     screen.blit(shrek_img, ball) # Draw ball
     player_text = basic_font.render(f'{score}', False, red)  # Render player score
     screen.blit(player_text, (screen_width/2 - 15, 10))  # Display score on screen
+    high_score_text = basic_font.render(f"HS: {high_score}", True, red)
+    screen.blit(high_score_text, (10,10))
 
     # Update display
     pygame.display.flip()
