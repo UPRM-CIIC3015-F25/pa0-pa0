@@ -133,7 +133,7 @@ player_speed = 0
 
 # Score Text setup
 score = 0
-basic_font = pygame.font.Font('freesansbold.ttf', 50)  # Font for displaying score
+basic_font = pygame.font.Font('pa0-pa0/assets/Prince Valiant.ttf', 50)  # Font for displaying score
 
 start = True  # Indicates if the game has started
 
