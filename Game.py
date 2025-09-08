@@ -55,14 +55,14 @@ def ball_movement():
 
             # La bola aumenta la velocidad cada vez que toca al jugador
             if ball_speed_x > 0:
-                ball_speed_x += 0.2
+                ball_speed_x += 0.4
             else:
-                ball_speed_x -= 0.2
+                ball_speed_x -= 0.4
 
             if ball_speed_y > 0:
-                ball_speed_y += 0.2
+                ball_speed_y += 0.4
             else:
-                ball_speed_y -= 0.2
+                ball_speed_y -= 0.4
 
     # Ball collision with top boundary
     if ball.top <= 0:
