@@ -5,13 +5,13 @@ pygame.init()
 
 high_score = 0
 
-lose_sound = pygame.mixer.Sound("pa0-pa0/assets/Nooo.mp3")
+lose_sound = pygame.mixer.Sound("assets/Nooo.mp3")
 lose_sound.set_volume(0.8)
 hit_sound = [  
-    pygame.mixer.Sound("pa0-pa0/assets/pinpon.mp3"),
-    pygame.mixer.Sound("pa0-pa0/assets/a_pinpon.mp3"),
-    pygame.mixer.Sound("pa0-pa0/assets/Cerdo.mp3"),
-    pygame.mixer.Sound("pa0-pa0/assets/Pinoccio.mp3")]
+    pygame.mixer.Sound("assets/pinpon.mp3"),
+    pygame.mixer.Sound("assets/a_pinpon.mp3"),
+    pygame.mixer.Sound("assets/Cerdo.mp3"),
+    pygame.mixer.Sound("assets/Pinoccio.mp3")]
 
 for audio in hit_sound:
     audio.set_volume(0.9)
@@ -53,6 +53,16 @@ def ball_movement():
             # TODO Task 6: Add sound effects HERE
             play_random_hit()
 
+            # La bola aumenta la velocidad cada vez que toca al jugador
+            if ball_speed_x > 0:
+                ball_speed_x += 0.2
+            else:
+                ball_speed_x -= 0.2
+
+            if ball_speed_y > 0:
+                ball_speed_y += 0.2
+            else:
+                ball_speed_y -= 0.2
 
     # Ball collision with top boundary
     if ball.top <= 0:
@@ -110,20 +120,20 @@ screen_width = 500  # Screen width (can be adjusted)
 screen_height = 500  # Screen height (can be adjusted)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Shrek The Game')  # Set window title
-pygame.mixer.music.load("pa0-pa0/assets/Believer_arreglada.mp3")
+pygame.mixer.music.load("assets/Believer_arreglada.mp3")
 # Se añadió la música en bucle, all final sale el cantante de smash mouth diciendo algo. Pensé en quitarlo pero env como homenaje lo voy a dejar.
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.1)
 
 
 # Background
-background = pygame.image.load("pa0-pa0/assets/Shrek bg.png")#Imagen de Shrek
+background = pygame.image.load("assets/Shrek bg.png")#Imagen de Shrek
 pygame.transform.scale(background, (screen_height, screen_width))
 bg_color = pygame.Color('grey12')
 
 # Game Rectangles (ball and player paddle)
 ball = pygame.Rect(screen_width / 2 - 15, screen_height / 2 - 15, 75, 75)  # Tamaño de la bola
-shrek_img = pygame.image.load("pa0-pa0/assets/shrek_face.png").convert_alpha()
+shrek_img = pygame.image.load("assets/shrek_face.png").convert_alpha()
 shrek_img = pygame.transform.smoothscale(shrek_img, (ball.width, ball.height))
 
 
@@ -139,7 +149,7 @@ player_speed = 0
 
 # Score Text setup
 score = 0
-basic_font = pygame.font.Font('pa0-pa0/assets/Prince Valiant.ttf', 50)  # Font for displaying score
+basic_font = pygame.font.Font('assets/Prince Valiant.ttf', 50)  # Font for displaying score
 
 start = True  # Indicates if the game has started
 
