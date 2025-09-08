@@ -4,7 +4,25 @@ pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 
 lose_sound = pygame.mixer.Sound("pa0-pa0/assets/Nooo.mp3")
-lose_sound.set_volume(0.5)
+lose_sound.set_volume(0.8)
+hit_sound = [  
+    pygame.mixer.Sound("pa0-pa0/assets/pinpon.mp3"),
+    pygame.mixer.Sound("pa0-pa0/assets/a_pinpon.mp3"),
+    pygame.mixer.Sound("pa0-pa0/assets/Cerdo.mp3"),
+    pygame.mixer.Sound("pa0-pa0/assets/Pinoccio.mp3")]
+
+for audio in hit_sound:
+    audio.set_volume(0.9)
+
+last_sound = None
+
+def play_random_hit():
+    global last_sound
+    sound = random.choice(hit_sound)
+    while sound == last_sound:
+        sound = random.choice(hit_sound)
+    sound.play()
+    last_sound = sound
 
 def ball_movement():
     """
@@ -31,6 +49,7 @@ def ball_movement():
             score += 1  # Increase player score
             ball_speed_y *= -1  # Reverse ball's vertical direction
             # TODO Task 6: Add sound effects HERE
+            play_random_hit()
 
 
     # Ball collision with top boundary
@@ -88,7 +107,7 @@ pygame.display.set_caption('Shrek The Game')  # Set window title
 pygame.mixer.music.load("pa0-pa0/assets/Believer_arreglada.mp3")
 # Se añadió la música en bucle, all final sale el cantante de smash mouth diciendo algo. Pensé en quitarlo pero env como homenaje lo voy a dejar.
 pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.set_volume(0.1)
 
 
 # Background
